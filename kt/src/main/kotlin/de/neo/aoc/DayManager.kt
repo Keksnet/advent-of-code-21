@@ -19,10 +19,13 @@ class DayManager {
 
     fun register(day: IDay) {
         days[day.getDayName()] = day
-        println(day.getDayName())
     }
 
     operator fun get(name: String) = days[name] ?: object : AbstractDay() {
+        override fun useExampleFile() = false
+
+        override fun parseInput() {}
+
         override fun part01() = ""
 
         override fun part02() = ""

@@ -1,6 +1,7 @@
 package de.neo.aoc
 
 import de.neo.aoc.days.Day04
+import de.neo.aoc.days.Day05
 
 class Main {
 
@@ -8,6 +9,7 @@ class Main {
 
     init {
         Day04()
+        Day05()
     }
 
     fun launch(day: String) {
@@ -17,5 +19,5 @@ class Main {
 }
 
 fun main() {
-    Main().launch("Day04")
+    Main().launch("Day05")
 }

@@ -17,7 +17,12 @@ abstract class AbstractDay : IDay {
     override fun getDayName(): String = javaClass.simpleName
 
     override fun exec() {
-        input = Files.readString(Path.of("${getDayName().lowercase()}.txt"))
+        input = if(useExampleFile()) {
+            Files.readString(Path.of("${getDayName().lowercase()}.txt.t"))
+        }else {
+            Files.readString(Path.of("${getDayName().lowercase()}.txt"))
+        }
+        parseInput()
         println("Part 1: ${part01()}")
         println("Part 2: ${part02()}")
     }

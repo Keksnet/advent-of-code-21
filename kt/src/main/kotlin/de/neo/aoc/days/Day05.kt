@@ -174,18 +174,16 @@ class Day05 : AbstractDay() {
 
         Files.writeString(Path.of("day05_vis.html"), buildString {
             append("""
+		<html>
+		<head>
                 <style>
                 * {
-                    transition: all 0.25s;
-                    font-family: courier;
+                    font-family: "Courier New", Courier, monospace;
+		    background-color: #333;
                 }
                 
                 .val-0 {
                     color: grey;
-                }
-                
-                .val-0:hover {
-                    color: white;
                 }
                 
                 .val-1 {
@@ -205,9 +203,15 @@ class Day05 : AbstractDay() {
                 }
                 
                 .val-5 {
-                    color: dark-red;
+                    color: darkred;
                 }
+
+		.val-high {
+		    color: black;
+		}
                 </style>
+		</head>
+		<body>
             """.trimIndent())
             for(y in 0 until highestY) {
                 for(x in 0 until highestX) {
@@ -228,8 +232,9 @@ class Day05 : AbstractDay() {
                         else -> "<a class=\"val-high\">${positions["$x;$y"]}</a>"
                     })
                 }
-                append("<br>")
+                append("<br>\n")
             }
+	    append("</body>\n</html>")
         })
 
         return "$overlapping overlapping positions found"

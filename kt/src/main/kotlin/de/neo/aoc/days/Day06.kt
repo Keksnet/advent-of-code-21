@@ -1,17 +1,50 @@
 package de.neo.aoc.days
 
+import de.neo.aoc.days.day06.LaternFish
+import java.util.*
+import java.util.concurrent.Executors
+import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
+
 class Day06 : AbstractDay() {
 
-    override fun useExampleFile() = true
+    override fun useExampleFile() = false
+
+    private var fishes01 = HashSet<LaternFish>()
+    private var fishes02 = HashSet<LaternFish>()
 
     override fun parseInput() {
+        val fishs = getInput().split(",")
+
+        for(i in fishs) {
+            fishes01.add(LaternFish(i.toInt()))
+            fishes02.add(LaternFish(i.toInt()))
+        }
     }
 
     override fun part01(): String {
-        return "Hello, World"
+        simulate(80, fishes01)
+
+        return fishes01.size.toString()
     }
 
     override fun part02(): String {
-        return getInput()
+        /* This takes way too long. See python code for solution.
+        simulate(256, fishes02) */
+
+        return "This takes way too long. See python code for solution."
+    }
+
+    fun simulate(days: Int, initialFishes: HashSet<LaternFish>) {
+        for(i in 0 until days) {
+            println("Day: $i @ ${initialFishes.size}")
+            val toAdd = HashSet<LaternFish>()
+            initialFishes.forEach {
+                if(it.tick()) {
+                    toAdd.add(LaternFish())
+                }
+            }
+            initialFishes.addAll(toAdd)
+        }
     }
 }

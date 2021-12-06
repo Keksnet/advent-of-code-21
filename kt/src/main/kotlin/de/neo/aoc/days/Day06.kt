@@ -29,10 +29,10 @@ class Day06 : AbstractDay() {
     }
 
     override fun part02(): String {
-        /* This takes way too long. See python code for solution.
-        simulate(256, fishes02) */
+        /* This takes way too long. But I did it anyway and let it run a while on a linux machine. */
+        simulate(256, fishes02)
 
-        return "This takes way too long. See python code for solution."
+        return fishes02.size.toString()
     }
 
     fun simulate(days: Int, initialFishes: HashSet<LaternFish>) {

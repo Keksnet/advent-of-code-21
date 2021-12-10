@@ -13,6 +13,7 @@ class Main {
         Day07()
         Day08()
         Day09()
+        Day10()
     }
 
     fun launch(day: String) {
@@ -22,5 +23,5 @@ class Main {
 }
 
 fun main() {
-    Main().launch("Day09")
+    Main().launch("Day10")
 }

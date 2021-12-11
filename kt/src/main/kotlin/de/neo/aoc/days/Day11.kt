@@ -4,7 +4,7 @@ import de.neo.aoc.days.day11.Octopus
 
 class Day11 : AbstractDay() {
 
-    override fun useExampleFile() = true
+    override fun useExampleFile() = false
 
     private val field: ArrayList<ArrayList<Octopus>> = ArrayList()
     private var flashes = 0
@@ -21,51 +21,48 @@ class Day11 : AbstractDay() {
         }
     }
 
-    fun simulateTick(i: Int, j: Int, octo: Octopus, origin: Octopus) {
-        if(octo.tick(!(octo == origin))) {
+    fun simulateTick(i: Int, j: Int, octo: Octopus) {
+        if(octo.tick()) {
             flashes++
             if(i != 0 /*&& field[i - 1][j] != origin*/) {
-                simulateTick(i - 1, j, field[i - 1][j], octo)
+                simulateTick(i - 1, j, field[i - 1][j])
             }
             if(j != 0 /*&& field[i][j - 1] != origin*/) {
-                simulateTick(i, j - 1, field[i][j - 1], octo)
+                simulateTick(i, j - 1, field[i][j - 1])
             }
             if(j != field[i].size - 1 /*&& field[i][j + 1] != origin*/) {
-                simulateTick(i, j + 1, field[i][j + 1], octo)
+                simulateTick(i, j + 1, field[i][j + 1])
             }
             if(i != field.size - 1 /*&& field[i + 1][j] != origin*/) {
-                simulateTick(i + 1, j, field[i + 1][j], octo)
+                simulateTick(i + 1, j, field[i + 1][j])
             }
 
             if(i != 0 && j != 0 /*&& field[i - 1][j - 1] != origin*/) {
-                simulateTick(i - 1, j - 1, field[i - 1][j - 1], octo)
+                simulateTick(i - 1, j - 1, field[i - 1][j - 1])
             }
             if(i != field.size - 1 && j != field[i].size - 1 /*&& field[i + 1][j + 1] != origin*/) {
-                simulateTick(i + 1, j + 1, field[i + 1][j + 1], octo)
+                simulateTick(i + 1, j + 1, field[i + 1][j + 1])
             }
             if(i != 0 && j != field[i].size - 1 /*&& field[i - 1][j + 1] != origin*/) {
-                simulateTick(i - 1, j + 1, field[i - 1][j + 1], octo)
+                simulateTick(i - 1, j + 1, field[i - 1][j + 1])
             }
             if(i != field.size - 1 && j != 0 /*&& field[i + 1][j - 1] != origin*/) {
-                simulateTick(i + 1, j - 1, field[i + 1][j - 1], octo)
+                simulateTick(i + 1, j - 1, field[i + 1][j - 1])
             }
         }
     }
 
     fun simulate(times: Int) {
         for(k in 0 until times) {
-            if(k == 0) {
-                dump()
-            }
             for(i in field.indices) {
                 for(j in field[i].indices) {
-                    field[i][j].init = true
-                    simulateTick(i, j, field[i][j], field[i][j])
-                    field[i][j].init = false
+                    simulateTick(i, j, field[i][j])
                 }
             }
-            if(k == 0) {
-                dump()
+            for(line in field) {
+                for(octopus in line) {
+                    octopus.flashed = false
+                }
             }
         }
     }
@@ -86,6 +83,24 @@ class Day11 : AbstractDay() {
     }
 
     override fun part02(): String {
-        return ""
+        var i = 100
+        while(true) {
+            simulate(1)
+            var allFlashed = true
+            for(line in field) {
+                for(octopus in line) {
+                    if(octopus.getEnergy() != 0) {
+                        allFlashed = false
+                        break
+                    }
+                }
+            }
+            if(allFlashed) {
+                break
+            }
+            i++
+        }
+        i++
+        return "Flashed after $i times"
     }
 }

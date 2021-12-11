@@ -2,20 +2,14 @@ package de.neo.aoc.days.day11
 
 class Octopus(private var energy: Int) {
 
-    var init = false
-    private var chain = false
+    var flashed = false
 
-    fun tick(chain: Boolean): Boolean {
-        if(this.chain && chain && !init) {
-            if(!init) {
-                //println("Octopus is not init: $energy | $chain | $init")
-            }
-            return false
-        }
-        this.chain = chain
+    fun tick(): Boolean {
+        if(flashed) return false
         energy++
         if(energy > 9) {
             energy = 0
+            flashed = true
             return true
         }
         return false

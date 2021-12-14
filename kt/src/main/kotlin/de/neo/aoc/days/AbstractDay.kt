@@ -18,9 +18,9 @@ abstract class AbstractDay : IDay {
 
     override fun exec() {
         input = if(useExampleFile()) {
-            Files.readString(Path.of("${getDayName().lowercase()}.txt.t"))
+            Files.readString(Path.of("input","${getDayName().lowercase()}.t.txt"))
         }else {
-            Files.readString(Path.of("${getDayName().lowercase()}.txt"))
+            Files.readString(Path.of("input", "${getDayName().lowercase()}.txt"))
         }
         parseInput()
         println("Part 1: ${part01()}")

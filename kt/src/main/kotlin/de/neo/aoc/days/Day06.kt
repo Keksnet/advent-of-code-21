@@ -29,7 +29,7 @@ class Day06 : AbstractDay() {
     }
 
     override fun part02(): String {
-        /* This takes way too long. But I did it anyway and let it run a while on a linux machine. */
+	// Did not solve
         simulate(256, fishes02)
 
         return fishes02.size.toString()

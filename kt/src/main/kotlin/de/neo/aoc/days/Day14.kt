@@ -72,7 +72,7 @@ class Day14 : AbstractDay() {
     }
 
     override fun part02(): String {
-        // Again I put this on a machine running linux
+        // Did not solve
         val replaced = run {
             var last = template
             for(i in 0 until 40) {
